@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        .total-portfolio-value {
+            text-align: right;
+            padding: 10px;
+            font-size: 20px;
+        }
+
+        .input-container {
+            text-align: left;
+            width: 60%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        /* Add margin to create spacing */
+        .spacer {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Stock Market Portfolio</h1>
+    <table>
+        <tr>
+            <th>Stock Symbol</th>
+            <th>Number of Shares</th>
+            <th>Current Price</th>
+            <th>Stock Value</th>
+        </tr>
+        {% for symbol, num_shares, current_price, stock_value in portfolio %}
+        <tr>
+            <td>{{ symbol }}</td>
+            <td>{{ num_shares }}</td>
+            <td>${{ current_price }}</td>
+            <td>${{ stock_value }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p class="total-portfolio-value">Total Portfolio Value: ${{ total_value }}</p>
+
+    <div class="input-container spacer">
+        <h2>Add Stock to Portfolio</h2>
+        <form method="POST" action="{{ url_for('add_stock') }}">
+            <label for="symbol">Stock Symbol:</label>
+            <input type="text" name="symbol" required>
+            <label for="num_shares">Number of Shares:</label>
+            <input type="number" name="num_shares" required>
+            <div class="button-container">
+                <button type="submit">Add Stock</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="input-container spacer">
+        <h2>Remove Stock from Portfolio</h2>
+        <form method="POST" action="{{ url_for('remove_stock') }}">
+            <label for="symbol">Stock Symbol:</label>
+            <input type="text" name="symbol" required>
+            <div class="button-container">
+                <button type="submit">Remove Stock</button>
+            </div>
+        </form>
+        {% if removal_message %}
+        <div class="button-container">
+            <a href="{{ url_for('portfolio') }}"><button>Back to Portfolio</button></a>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="spacer">
+        <a href="{{ url_for('home') }}">Back to Home</a>
+    </div>
+</body>
+
+</html>
