@@ -16,7 +16,7 @@ def format_number_with_commas_and_decimals(number):
 
 app = Flask(__name__)
 
-api_key = "3HWN1A3040X7J1GS"
+api_key = "null"
 
 # Portfolio data structure (a dictionary with stock symbols as keys and number of shares as values)
 portfolio = {}
@@ -123,3 +123,4 @@ def remove_stock():
 
 if __name__ == "__main__":
     app.run(debug=False, host='0.0.0.0')
+
