@@ -6,7 +6,7 @@ __updated__ = "2023-10-20"
 
 import requests
 
-api_key = "3HWN1A3040X7J1GS"
+api_key = "null"
 
 # Portfolio data structure (a dictionary with stock symbols as keys and number of shares as values)
 portfolio = {}
@@ -99,3 +99,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
